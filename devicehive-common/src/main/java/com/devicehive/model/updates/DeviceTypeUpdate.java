@@ -23,7 +23,9 @@ package com.devicehive.model.updates;
 
 import com.devicehive.json.strategies.JsonPolicyDef;
 import com.devicehive.model.HiveEntity;
+import com.devicehive.model.JsonStringWrapper;
 import com.devicehive.vo.DeviceTypeVO;
+import com.google.gson.annotations.SerializedName;
 
 import javax.validation.constraints.Size;
 import java.util.Optional;
@@ -42,6 +44,10 @@ public class DeviceTypeUpdate implements HiveEntity {
     @JsonPolicyDef({DEVICE_PUBLISHED, DEVICE_SUBMITTED, USER_PUBLISHED, DEVICE_TYPES_LISTED, DEVICE_TYPE_PUBLISHED})
     private String description;
 
+    @SerializedName("data")
+    @JsonPolicyDef({DEVICE_PUBLISHED, DEVICE_SUBMITTED, USER_PUBLISHED, DEVICE_TYPES_LISTED, DEVICE_TYPE_PUBLISHED})
+    private JsonStringWrapper data;
+
     public Optional<String> getName() {
         return Optional.ofNullable(name);
     }
@@ -58,11 +64,19 @@ public class DeviceTypeUpdate implements HiveEntity {
         this.description = description;
     }
 
+    public Optional<JsonStringWrapper> getData() {
+        return Optional.ofNullable(data);
+    }
+
+    public void setData(JsonStringWrapper data) {
+        this.data = data;
+    }
+
     public DeviceTypeVO convertTo() {
         DeviceTypeVO deviceTypeVO = new DeviceTypeVO();
         deviceTypeVO.setName(name);
         deviceTypeVO.setDescription(description);
-        
+        deviceTypeVO.setData(data);
         return deviceTypeVO;
     }
 }

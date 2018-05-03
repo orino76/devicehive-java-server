@@ -73,6 +73,14 @@ public class DeviceType implements HiveEntity {
     @JsonPolicyDef({DEVICE_PUBLISHED, DEVICE_SUBMITTED, USER_PUBLISHED, DEVICE_TYPES_LISTED, DEVICE_TYPE_PUBLISHED})
     private String description;
 
+    @SerializedName("data")
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "jsonString", column = @Column(name = "data"))
+    })
+    @JsonPolicyDef({DEVICE_PUBLISHED, DEVICE_SUBMITTED, USER_PUBLISHED, DEVICE_TYPES_LISTED, DEVICE_TYPE_PUBLISHED})
+    private JsonStringWrapper data;
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_device_type", joinColumns = {@JoinColumn(name = "device_type_id", nullable = false,
             updatable = false)},
@@ -121,6 +129,14 @@ public class DeviceType implements HiveEntity {
         this.description = description;
     }
 
+    public JsonStringWrapper getData() {
+        return data;
+    }
+
+    public void setData(JsonStringWrapper data) {
+        this.data = data;
+    }
+
     public Set<User> getUsers() {
         return users;
     }
@@ -163,6 +179,7 @@ public class DeviceType implements HiveEntity {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
+                ", data='" + data + '\'' +
                 '}';
     }
 
@@ -171,6 +188,7 @@ public class DeviceType implements HiveEntity {
             DeviceTypeVO vo = new DeviceTypeVO();
             vo.setId(deviceType.getId());
             vo.setName(deviceType.getName());
+            vo.setData(deviceType.getData());
             vo.setDescription(deviceType.getDescription());
             vo.setEntityVersion(deviceType.getEntityVersion());
             return vo;
@@ -204,6 +222,7 @@ public class DeviceType implements HiveEntity {
             deviceType.setId(vo.getId());
             deviceType.setName(vo.getName());
             deviceType.setDescription(vo.getDescription());
+            deviceType.setData(vo.getData());
             deviceType.setEntityVersion(vo.getEntityVersion());
             return deviceType;
         }

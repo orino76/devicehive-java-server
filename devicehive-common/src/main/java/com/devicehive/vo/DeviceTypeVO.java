@@ -22,6 +22,7 @@ package com.devicehive.vo;
 
 import com.devicehive.json.strategies.JsonPolicyDef;
 import com.devicehive.model.HiveEntity;
+import com.devicehive.model.JsonStringWrapper;
 import com.google.gson.annotations.SerializedName;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -48,6 +49,10 @@ public class DeviceTypeVO implements HiveEntity {
     @JsonPolicyDef({DEVICE_PUBLISHED, DEVICE_SUBMITTED, USER_PUBLISHED, DEVICE_TYPES_LISTED, DEVICE_TYPE_PUBLISHED})
     private String description;
 
+    @SerializedName("data")
+    @JsonPolicyDef({DEVICE_PUBLISHED, DEVICE_SUBMITTED, USER_PUBLISHED, DEVICE_TYPES_LISTED, DEVICE_TYPE_PUBLISHED})
+    private JsonStringWrapper data;
+
     @ApiModelProperty(hidden = true)
     private Long entityVersion;
 
@@ -73,6 +78,14 @@ public class DeviceTypeVO implements HiveEntity {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public JsonStringWrapper getData() {
+        return data;
+    }
+
+    public void setData(JsonStringWrapper data) {
+        this.data = data;
     }
 
     public Long getEntityVersion() {

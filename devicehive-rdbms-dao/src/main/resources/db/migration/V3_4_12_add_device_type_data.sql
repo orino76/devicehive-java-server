@@ -1,0 +1,1 @@
+ALTER TABLE device_type ADD COLUMN data TEXT;

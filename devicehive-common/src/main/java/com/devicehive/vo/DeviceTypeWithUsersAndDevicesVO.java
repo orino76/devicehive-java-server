@@ -41,6 +41,7 @@ public class DeviceTypeWithUsersAndDevicesVO extends DeviceTypeVO {
         setId(vo.getId());
         setName(vo.getName());
         setDescription(vo.getDescription());
+        setData(vo.getData());
         setEntityVersion(vo.getEntityVersion());
     }
 

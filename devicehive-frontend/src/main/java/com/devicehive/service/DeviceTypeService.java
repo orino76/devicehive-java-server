@@ -102,6 +102,9 @@ public class DeviceTypeService extends BaseDeviceTypeService {
         if (deviceTypeUpdate.getDescription().isPresent()) {
             existing.setDescription(deviceTypeUpdate.getDescription().get());
         }
+        if (deviceTypeUpdate.getData().isPresent()) {
+            existing.setData(deviceTypeUpdate.getData().get());
+        }
         hiveValidator.validate(existing);
 
         return deviceTypeDao.merge(existing);

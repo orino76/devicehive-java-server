@@ -93,6 +93,7 @@ public class DeviceTypeDaoRdbmsImpl extends RdbmsGenericDao implements DeviceTyp
         DeviceType deviceType = find(DeviceType.class, existing.getId());
         deviceType.setName(existing.getName());
         deviceType.setDescription(existing.getDescription());
+        deviceType.setData(existing.getData());
         deviceType.setEntityVersion(existing.getEntityVersion());
         super.merge(deviceType);
         return existing;

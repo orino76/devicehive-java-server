@@ -88,6 +88,8 @@ public class ServerResponsesFactory {
         notification.setId(Math.abs(new Random().nextInt())); // TODO: remove this when id generation will be moved to backend
         notification.setNotification(notificationName);
         notification.setDeviceId(device.getDeviceId());
+        notification.setDeviceTypeId(device.getDeviceTypeId());
+        notification.setNetworkId(device.getNetworkId());
         Gson gson = GsonFactory.createGson(DEVICE_PUBLISHED);
         JsonElement deviceAsJson = gson.toJsonTree(device);
         JsonStringWrapper wrapperOverDevice = new JsonStringWrapper(deviceAsJson.toString());
